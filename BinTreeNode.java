@@ -149,7 +149,28 @@ public class BinTreeNode {
    */
   public BinTreeNode rotationSearch(int x) {
    //TODO
-	  return null;
+   if(this.hasLeft()) {
+    if(this.left.hasLeft()) {
+      this.left.rotationSearch(x);
+    } else if(this.getLeft().getValue() == x) {
+      BinTreeNode temp = this.left;
+      this.left = this.left.getRight();
+      this.left.right = temp;
+    }
+  }
+
+  if(this.hasRight()) {
+    if(this.right.hasRight()) {
+      this.right.rotationSearch(x);
+    } else if(this.getRight().getValue() == x) {
+        BinTreeNode temp = this.right;
+        this.right = this.right.getLeft();
+        this.right.left = temp;
+    }
+  }
+
+    
+	  return this;
   }
 
   /**
