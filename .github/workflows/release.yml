@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Delete files not included in release
+        run: |
+          FILENAME=".releaseignore"
+          LINES=$(cat $FILENAME)
+
+          for LINE in $LINES
+          do
+              rm -r $LINE
+          done
+          
+          rm $FILENAME
+                  
+      - name: Create release zip
+        run: zip -r Abgabe.zip . -9 -x .git/\*
+          
+      - name: ls -la
+        run: ls -la .
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Abgabe
+          tag_name: abgabe
+          files: Abgabe.zip
