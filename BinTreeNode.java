@@ -119,7 +119,7 @@ public class BinTreeNode {
    */
   public void insert(int x) {
    //TODO
-	  if(this.getValue()== x)
+	  if(this.getValue() == x)
 	  {
 		  
 	  }
@@ -156,8 +156,18 @@ public class BinTreeNode {
    * @return Geordnete Liste aller Zahlen, die in diesem Teilbaum gespeichert sind.
    */
   public String toString() {
-    //TODO
-	  return "";
+    String output = "";
+    if(hasLeft()) {
+      output += left.toString() + ", ";
+    }
+
+    output += value;
+
+    if(hasRight()) {
+      output += ", " + right.toString();
+    }
+
+	  return output;
   }
  
   /**

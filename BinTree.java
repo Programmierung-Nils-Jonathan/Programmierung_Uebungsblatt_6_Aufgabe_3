@@ -39,16 +39,20 @@ public class BinTree {
    * @param trees Die Baeume mit den einzufuegenden Zahlen.
    * @return Der neue Baum mit allen Zahlen.
    */
-  public static BinTree merge(BinTree... trees) {
+  /*public static BinTree merge(BinTree... trees) {
     // TODO
-  }
+  }*/
   /**
    * Fuegt eine Zahl ein. Keine Aenderung, wenn das Element
    * schon enthalten ist.
    * @param x einzufuegende Zahl
    */
   public void insert(int x) {
-   //TODO
+    if(isEmpty()) {
+      root = new BinTreeNode(x);
+    } else {
+      root.insert(x);
+    }
   }
   /**
    * Sucht x, ohne den Baum zu veraendern.
@@ -56,21 +60,25 @@ public class BinTree {
    * @return true, falls x im Baum enthalten ist, sonst false
    */
   public boolean simpleSearch(int x) {
-   //TODO
+    return root.simpleSearch(x);
   }
   /**
    * Sucht x und rotiert den Knoten, bei dem die Suche nach x endet, in die Wurzel.
    * @param x der gesuchte Wert
    * @return true, falls x im Baum enthalten ist, sonst false
    */
-    public boolean search(int x) {
+    /*public boolean search(int x) {
  	//TODO
-    }
+    }*/
   /**
    * @return Sortierte Ausgabe aller Elemente.
    */
   public String toString() {
-    //TODO
+    String output = "tree(";
+    output += root.toString();
+    output += ")";
+
+    return output;
   }
   /**
    * Wandelt den Baum in einen Graphen im dot Format um.
@@ -140,7 +148,7 @@ public class BinTree {
     }
     System.out.println("Aufgabe c): geordnete String-Ausgabe");
     System.out.println(myTree.toString());
-    System.out.println("Aufgabe d): Suchen nach vorhandenen Elementen mit Rotation.");
+    /*System.out.println("Aufgabe d): Suchen nach vorhandenen Elementen mit Rotation.");
     myTree.search(3);
     myTree.search(23);
     myTree.search(15);
@@ -157,6 +165,6 @@ public class BinTree {
     BinTree tree2 = new BinTree(4, 7, 2,9 ,5);
     System.out.println(myTree.toString());
     System.out.println(tree2.toString());
-    System.out.println(BinTree.merge(myTree, tree2).toString());
+    System.out.println(BinTree.merge(myTree, tree2).toString());*/
   }
 }
