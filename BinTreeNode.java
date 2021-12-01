@@ -95,6 +95,22 @@ public class BinTreeNode {
    */
   public boolean simpleSearch(int x) {
     //TODO
+	  if(this.getValue()==x)
+	  {
+		  return true;
+	  }
+	  else if(this.getValue()>x&&this.hasLeft())
+	  {
+		  return this.getLeft().simpleSearch(x);
+	  }
+	  else if(this.getValue()<x&&this.hasRight())
+	  {
+		  return this.getRight().simpleSearch(x);
+	  }
+	  else
+	  {
+		  return false;
+	  }
   }
 
   /**
@@ -103,6 +119,26 @@ public class BinTreeNode {
    */
   public void insert(int x) {
    //TODO
+	  if(simpleSearch(x))
+	  {
+		  
+	  }
+	  else if(this.getValue()>x&&this.hasLeft())
+	  {
+		  left.insert(x);
+	  }
+	  else if(this.getValue()<x&&this.hasRight())
+	  {
+		  right.insert(x);
+	  }
+	  else if(this.getValue()>x&&!this.hasLeft())
+	  {
+		  this.left = new BinTreeNode(x);
+	  }
+	  else if(this.getValue()<x&&!this.hasRight())
+	  {
+		  this.right = new BinTreeNode(x);
+	  }
   }
 
   /**
@@ -113,6 +149,7 @@ public class BinTreeNode {
    */
   public BinTreeNode rotationSearch(int x) {
    //TODO
+	  return null;
   }
 
   /**
@@ -120,6 +157,7 @@ public class BinTreeNode {
    */
   public String toString() {
     //TODO
+	  return "";
   }
  
   /**
