@@ -1,181 +1,191 @@
 /**
-* Import von Paketen, in denen benoetigte Library-Hilfsfunktionen zu finden sind
-*/
-import java.util.Random ;
-import java.nio.file.*;
-import java.io.*;
-/**
- * Implementiert einen sortierten Binaerbaum mit Rotation-zur-Wurzel Optimierung.
+ * Ein Knoten in einem binaeren Baum.
+ *
+ * Der gespeicherte Wert ist unveraenderlich,
+ * die Referenzen auf die Nachfolger koennen aber
+ * geaendert werden.
+ *
+ * Die Klasse bietet Methoden, um Werte aus einem Baum
+ * zu suchen und einzufuegen. Die Methode zur Suche gibt
+ * es noch in einer optimierten Variante, um
+ * rotate-to-root Baeume zu verwalten.
  */
-public class BinTree {
+public class BinTreeNode {
   /**
-   * Wurzel des Baums
+   * Linker Nachfolger
    */
-  private BinTreeNode root;
+  private BinTreeNode left;
   /**
-   * Erstellt einen leeren Baum
+   * Rechter Nachfolger
    */
-  public BinTree() {
-    this.root = null ;
+  private BinTreeNode right;
+  /**
+   * Wert, der in diesem Knoten gespeichert ist
+   */
+  private final int value;
+
+  /**
+   * Erzeugt einen neuen Knoten ohne Nachfolger
+   * @param val Wert des neuen Knotens
+   */
+  public BinTreeNode(int val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  /**
+   * Erzeugt einen neuen Knoten mit den gegebenen Nachfolgern
+   * @param val Wert des neuen Knotens
+   * @param left linker Nachfolger des Knotens
+   * @param right rechter Nachfolger des Knotens
+   */
+  public BinTreeNode(int val, BinTreeNode left, BinTreeNode right) {
+    this.value = val;
+    this.left = left;
+    this.right = right;
+  }
+  
+  /**
+  * @return Wert des aktuellen Knotens
+  *
+  */	
+  public int getValue() {
+    return this.value;
+  }
+
+  /**
+   * @return Der gespeicherte Wert, umgewandelt in einen String
+   */
+  public String getValueString() {
+    return Integer.toString(this.value);
+  }
+
+  /**
+   * @return true, falls der Knoten einen linken Nachfolger hat, sonst false 
+   */	
+  public boolean hasLeft() {
+    return this.left != null;
   }
   /**
-   * Erstellt einen Baum mit den vorgegebenen Zahlen
-   * @param xs die einzupflegenden Zahlen
-   */
-  public BinTree(int... xs) {
-    for ( int x : xs ) {
-      this.insert(x);
-    }
+   * @return true, falls der Knoten einen rechten Nachfolger hat, sonst false 
+   */	
+  public boolean hasRight() {
+    return this.right != null;
+  }
+
+
+  /**
+   * @return linker Nachfolger des aktuellen Knotens
+   */		
+  public BinTreeNode getLeft() {
+    return this.left;
   }
   /**
-   * Test ob der Baum leer ist
-   * @return true, falls der Baum leer ist, sonst false
-   */
-  public boolean isEmpty() {
-    return this.root == null ;
+   * @return rechter Nachfolger des aktuellen Knotens
+   */	
+  public BinTreeNode getRight() {
+    return this.right;
   }
+
   /**
-   * Fuegt alle Zahlen aus den Baeumen in einen neuen Baum ein und gibt diesen zurueck.
-   * @param trees Die Baeume mit den einzufuegenden Zahlen.
-   * @return Der neue Baum mit allen Zahlen.
-   */
-  public static BinTree merge(BinTree... trees) {
-    // TODO
-	  return null;
-  }
-  /**
-   * Fuegt eine Zahl ein. Keine Aenderung, wenn das Element
-   * schon enthalten ist.
-   * @param x einzufuegende Zahl
-   */
-  public void insert(int x) {
-   //TODO
-	  if(this.isEmpty())
-	  {
-		  this.root = new BinTreeNode(x);
-	  }
-	  else
-	  {
-		  this.root.insert(x);
-	  }
-  }
-  /**
-   * Sucht x, ohne den Baum zu veraendern.
+   * Sucht in diesem Teilbaum nach x, ohne den Baum zu veraendern.
    * @param x der gesuchte Wert
-   * @return true, falls x im Baum enthalten ist, sonst false
+   * @return true, falls x enthalten ist, sonst false
    */
   public boolean simpleSearch(int x) {
-   //TODO
-	  if(this.isEmpty())
+    //TODO
+	  if(this.getValue()==x)
+	  {
+		  return true;
+	  }
+	  else if(this.getValue()>x&&this.hasLeft())
+	  {
+		  return this.getLeft().simpleSearch(x);
+	  }
+	  else if(this.getValue()<x&&this.hasRight())
+	  {
+		  return this.getRight().simpleSearch(x);
+	  }
+	  else
 	  {
 		  return false;
 	  }
-	  else
+  }
+
+  /**
+   * Fuegt x in diesen Teilbaum ein.
+   * @param x der einzufuegende Wert
+   */
+  public void insert(int x) {
+   //TODO
+	  if(this.getValue()== x)
 	  {
-		  return this.root.simpleSearch(x);
+		  
+	  }
+	  else if(this.getValue()>x&&this.hasLeft())
+	  {
+		  left.insert(x);
+	  }
+	  else if(this.getValue()<x&&this.hasRight())
+	  {
+		  right.insert(x);
+	  }
+	  else if(this.getValue()>x&&!this.hasLeft())
+	  {
+		  this.left = new BinTreeNode(x);
+	  }
+	  else if(this.getValue()<x&&!this.hasRight())
+	  {
+		  this.right = new BinTreeNode(x);
 	  }
   }
+
   /**
-   * Sucht x und rotiert den Knoten, bei dem die Suche nach x endet, in die Wurzel.
+   * Sucht in diesem Teilbaum nach x und rotiert den Endpunkt der Suche in die
+   * Wurzel.
    * @param x der gesuchte Wert
-   * @return true, falls x im Baum enthalten ist, sonst false
+   * @return die neue Wurzel des Teilbaums
    */
-    public boolean search(int x) {
- 	//TODO
-    	return false;
-    }
+  public BinTreeNode rotationSearch(int x) {
+   //TODO
+	  return null;
+  }
+
   /**
-   * @return Sortierte Ausgabe aller Elemente.
+   * @return Geordnete Liste aller Zahlen, die in diesem Teilbaum gespeichert sind.
    */
   public String toString() {
     //TODO
 	  return "";
   }
+ 
   /**
-   * Wandelt den Baum in einen Graphen im dot Format um.
-   * @return der umgewandelte Baum
+   * Erzeugt eine dot Repraesentation in str
+   * @param str Stringbuilder Objekt zur Konstruktion der Ausgabe
+   * @param nullNodes Hilfsvariable, um Nullknoten zu indizieren. Anfangswert sollte 0 sein. 
+   * @return Den nullNodes Wert fuer den behandelten Baum
    */
-  public String toDot() {
-    if ( this.isEmpty ()) {
-      return "digraph { null[shape=point]; }";
-    }
-    StringBuilder str = new StringBuilder ();
-    this.root.toDot (str, 0);
-    return "digraph { " + System.lineSeparator ()
-      + "graph[ordering=\"out\"]; " + System.lineSeparator ()
-      + str.toString ()
-      + "}" + System.lineSeparator ();
-  }
-  /**
-   * Speichert die dot Repraesentation in einer Datei.
-   *
-   * @param path Pfad unter dem gespeichert werden soll (Dateiname)
-   * @return true, falls erfolgreich gespeichert wurde, sonst false
-   * @see toDot
-   */
-  public boolean writeToFile(String path) {
-    boolean retval = true;
-    try {
-      Files.write(FileSystems.getDefault().getPath(path), this.toDot().getBytes());
-    } catch (IOException x) {
-      System.err.println("Es ist ein Fehler aufgetreten.");
-      System.err.format("IOException: %s%n" , x);
-      retval = false;
-    }
-    return retval;
-  }
-  /**
-   * Main-Methode, die einige Teile der Aufgabe testet.
-   *
-   * @param args Liste von Dateinamen, unter denen Baeume als dot
-   * gespeichert werden sollen. Es werden nur die ersten beiden verwendet.
-   */
-  public static void main(String[] args) {
-    Random prng = new Random();
-    int nodeCount = prng.nextInt(10) + 5;
-    BinTree myTree = new BinTree();
-    System.out.println("Aufgabe b): Zufaelliges Einfuegen");
-    for(int i = 0; i < nodeCount; ++i) {
-      myTree.insert(prng.nextInt(30));
-    }
-    myTree.insert(15);
-    myTree.insert(3);
-    myTree.insert(23);
-    if (args.length > 0) {
-      if (myTree.writeToFile(args[0])) {
-        System.out.println("Baum als DOT File ausgegeben in Datei " + args [0]);
-      }
+  public int toDot(StringBuilder str, int nullNodes) {
+    if(this.hasLeft()) {
+      str.append(this.getValueString() + " -> " + this.left.getValueString() + ";"
+        + System.lineSeparator());
+      nullNodes = this.left.toDot(str, nullNodes);
     } else {
-      System.out.println("Keine Ausgabe des Baums in Datei, zu wenige Aufrufparameter.");
+      str.append("null" + nullNodes + "[shape=point]" + System.lineSeparator()
+        + this.getValueString() + " -> null" + nullNodes + ";" + System.lineSeparator());
+      nullNodes += 1;
     }
-    System.out.println("Aufgabe a): Suchen nach zufaelligen Elementen");
-    for(int i = 0; i < nodeCount; ++i) {
-      int x = prng.nextInt (30);
-      if(myTree.simpleSearch(x)) {
-        System.out.println(x + " ist enthalten");
-      } else {
-        System.out.println(x + " ist nicht enthalten");
-      }
-    }
-    System.out.println("Aufgabe c): geordnete String-Ausgabe");
-    System.out.println(myTree.toString());
-    System.out.println("Aufgabe d): Suchen nach vorhandenen Elementen mit Rotation.");
-    myTree.search(3);
-    myTree.search(23);
-    myTree.search(15);
-    if (args.length > 1) {
-      if (myTree.writeToFile(args[1])) {
-        System.out.println("Baum nach Suchen von 15, 3 und 23 als DOT File ausgegeben in Datei "
-            + args [1]);
-      }
+    if(this.hasRight()) {
+      str.append(this.getValueString() + " -> " + this.right.getValueString() + ";"
+        + System.lineSeparator());
+      nullNodes = this.right.toDot(str, nullNodes);
     } else {
-      System.out.println("Keine Ausgabe des Baums in Datei, zu wenige Aufrufparameter.");
+      str.append("null" + nullNodes + "[shape=point]" + System.lineSeparator()
+        + this.getValueString() + " -> null" + nullNodes + ";" + System.lineSeparator());
+      nullNodes += 1;
     }
+    return nullNodes;
+  }
 
-    System.out.println("Aufgabe e): merge");
-    BinTree tree2 = new BinTree(4, 7, 2,9 ,5);
-    System.out.println(myTree.toString());
-    System.out.println(tree2.toString());
-    System.out.println(BinTree.merge(myTree, tree2).toString());
-  }
 }
