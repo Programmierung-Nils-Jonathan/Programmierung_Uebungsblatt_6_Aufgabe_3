@@ -68,6 +68,7 @@ public class BinTree {
    * @return true, falls x im Baum enthalten ist, sonst false
    */
     public boolean search(int x) {
+      System.out.println("Search x=" + x);
       return this.root.rotationSearch(x).getValue() == x;
     }
   /**
@@ -128,8 +129,8 @@ public class BinTree {
       myTree.insert(prng.nextInt(30));
     }
     myTree.insert(15);
-    //myTree.insert(3);
-    //myTree.insert(23);
+    myTree.insert(3);
+    myTree.insert(23);
     if (args.length > 0) {
       if (myTree.writeToFile(args[0])) {
         System.out.println("Baum als DOT File ausgegeben in Datei " + args [0]);
@@ -151,8 +152,8 @@ public class BinTree {
     myTree.writeToFile(args[1]);
     System.out.println("Aufgabe d): Suchen nach vorhandenen Elementen mit Rotation.");
     myTree.search(3);
-    myTree.search(23);
-    myTree.search(15);
+    //myTree.search(23);
+    //myTree.search(15);
     if (args.length > 1) {
       if (myTree.writeToFile(args[1])) {
         System.out.println("Baum nach Suchen von 15, 3 und 23 als DOT File ausgegeben in Datei "
