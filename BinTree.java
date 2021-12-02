@@ -67,7 +67,7 @@ public class BinTree {
 		  	b1 =BinTree.helphelp_merge(b1, b2.root.getLeft());
 		 }
 	 
-	  else if(b2.root.hasRight()) 
+	  if(b2.root.hasRight()) 
 		  {
 		   b1=	BinTree.helphelp_merge(b1, b2.root.getRight());
 		  }
