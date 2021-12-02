@@ -148,7 +148,9 @@ public class BinTreeNode {
    * @return die neue Wurzel des Teilbaums
    */
   public BinTreeNode rotationSearch(int x) {
-   if(this.hasLeft()) {
+    // Auskommentiert, da es nicht vollständig funktioniert um keine Compile oder Runtime Errors in der Abgabe zu haben
+
+    /*if(this.hasLeft()) {
     if(this.getLeft().getValue() == x) {
       System.out.println("Left.value == x (" + this.getLeft().getValue() + " == " + x + "); this.value = " + this.value);
       /*BinTreeNode temp = this.left;
@@ -157,8 +159,8 @@ public class BinTreeNode {
       System.out.println("Set this.left to " + this.left);
       this.left.right = temp;
       System.out.println("Set this.left.right to " + this.left.right);
-      return temp;*/
-    } else /*if(this.left.getValue() > x)*/ {
+      return temp;
+    } else if(this.left.getValue() > x) {
       System.out.println("recursively search left subtree " + this.left);
       this.left.rotationSearch(x);
     }
@@ -167,18 +169,18 @@ public class BinTreeNode {
   if(this.hasRight()) {
     if(this.getRight().getValue() == x) {
         System.out.println("Right.value == x; this.value = " + this.value);
-        /*BinTreeNode temp = this.right;
+        BinTreeNode temp = this.right;
         System.out.println("Set temp to " + temp);
         this.right = this.right.getLeft();
         System.out.println("Set this.right to " + this.right);
         this.right.left = temp;
         System.out.println("Set this.right.left to " + this.right.left);
-        return temp;*/
-    } else /*if(this.right.getValue() < x)*/ {
+        return temp;
+    } else if(this.right.getValue() < x) {
       System.out.println("recursively search right subtree " + this.right);
       this.right.rotationSearch(x);
     }
-  }
+  }*/
 
     
 	  return this;

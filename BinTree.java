@@ -198,8 +198,8 @@ public class BinTree {
     myTree.writeToFile(args[1]);
     System.out.println("Aufgabe d): Suchen nach vorhandenen Elementen mit Rotation.");
     myTree.search(3);
-    //myTree.search(23);
-    //myTree.search(15);
+    myTree.search(23);
+    myTree.search(15);
     if (args.length > 1) {
       if (myTree.writeToFile(args[1])) {
         System.out.println("Baum nach Suchen von 15, 3 und 23 als DOT File ausgegeben in Datei "
@@ -209,10 +209,10 @@ public class BinTree {
       System.out.println("Keine Ausgabe des Baums in Datei, zu wenige Aufrufparameter.");
     }
 
-    /*System.out.println("Aufgabe e): merge");
+    System.out.println("Aufgabe e): merge");
     BinTree tree2 = new BinTree(4, 7, 2,9 ,5);
     System.out.println(myTree.toString());
     System.out.println(tree2.toString());
-    System.out.println(BinTree.merge(myTree, tree2).toString());*/
+    System.out.println(BinTree.merge(myTree, tree2).toString());
   }
 }
