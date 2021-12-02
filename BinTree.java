@@ -39,15 +39,15 @@ public class BinTree {
    * @param trees Die Baeume mit den einzufuegenden Zahlen.
    * @return Der neue Baum mit allen Zahlen.
    */
- public static BinTree merge(BinTree... trees) {
+   public static BinTree merge(BinTree... trees) {
 	  int n= trees.length;
 	  return helphelphelp_merge(n,trees);
   }
   public static BinTree helphelphelp_merge(int n,BinTree... trees) {
      //TODO
 	  
-	  BinTree.help_merge(trees[0], trees[n-1]);
-	  if(n>1)
+	  trees[0]=BinTree.help_merge(trees[0], trees[n-1]);
+	  if(n>2)
 		  {
 		  	BinTree.helphelphelp_merge(n-1,trees);
 		  }
@@ -62,26 +62,26 @@ public class BinTree {
 	  
 	  if(b2.root.hasLeft()) 
 		 {
-		  	BinTree.helphelp_merge(b1, b2.root.getLeft());
+		  	b1 =BinTree.helphelp_merge(b1, b2.root.getLeft());
 		 }
 	 
 	  else if(b2.root.hasRight()) 
 		  {
-		  	BinTree.helphelp_merge(b1, b2.root.getRight());
+		   b1=	BinTree.helphelp_merge(b1, b2.root.getRight());
 		  }
 	  return b1;
   }
   private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
   {
 	  b1.insert(b2.getValue());
+	  
 	  if(b2.hasLeft()) 
 		 {
-		  	BinTree.helphelp_merge(b1, b2.getLeft());
+		  	b1 = BinTree.helphelp_merge(b1, b2.getLeft());
 		 }
-	 
-	  else if(b2.hasRight()) 
+	  if(b2.hasRight()) 
 		  {
-		  	BinTree.helphelp_merge(b1, b2.getRight());
+		  	b1 = BinTree.helphelp_merge(b1, b2.getRight());
 		  }
 	  return b1;
   }
