@@ -40,12 +40,13 @@ public class BinTree {
    * @return Der neue Baum mit allen Zahlen.
    */
    public static BinTree merge(BinTree... trees) {
+	   //ist die ursprüngliche Methode
 	  int n= trees.length;
 	  return helphelphelp_merge(n,trees);
   }
   public static BinTree helphelphelp_merge(int n,BinTree... trees) {
-     //TODO
-	  
+     
+	  //führt die Method wirklich durch, durch die Variable n, kann ich den letzten Teil des Arrays quasi löschen
 	  trees[0]=BinTree.help_merge(trees[0], trees[n-1]);
 	  if(n>2)
 		  {
@@ -55,6 +56,7 @@ public class BinTree {
   }
   private static BinTree help_merge(BinTree b1,BinTree b2)
   {
+	  // fügt die wurzel ein und ruft die Methode helphelp_merge auf
 	  if(!(b2.root==null)) 
 		 {
 		  	b1.insert(b2.root.getValue());
@@ -73,6 +75,7 @@ public class BinTree {
   }
   private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
   {
+	  /fügt die einzelnen Nodes eines Baumes aus dem Array in den Baum b1 ein
 	  b1.insert(b2.getValue());
 	  
 	  if(b2.hasLeft()) 
