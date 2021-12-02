@@ -20,4 +20,4 @@ jobs:
       - name: Compile and Run
         run: |
           javac BinTree.java
-          java BinTree
+          java BinTree t1.dot t2.dot
