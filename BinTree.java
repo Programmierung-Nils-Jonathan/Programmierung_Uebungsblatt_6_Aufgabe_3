@@ -75,7 +75,7 @@ public class BinTree {
   }
   private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
   {
-	  /fügt die einzelnen Nodes eines Baumes aus dem Array in den Baum b1 ein
+	  //fügt die einzelnen Nodes eines Baumes aus dem Array in den Baum b1 ein
 	  b1.insert(b2.getValue());
 	  
 	  if(b2.hasLeft()) 
