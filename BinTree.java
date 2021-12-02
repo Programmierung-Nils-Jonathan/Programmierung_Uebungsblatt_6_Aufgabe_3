@@ -39,9 +39,33 @@ public class BinTree {
    * @param trees Die Baeume mit den einzufuegenden Zahlen.
    * @return Der neue Baum mit allen Zahlen.
    */
-  /*public static BinTree merge(BinTree... trees) {
-    // TODO
-  }*/
+ public static BinTree merge(BinTree... trees) {
+	  int n= trees.length;
+	  return helphelphelp_merge(n,trees);
+  }
+  public static BinTree helphelphelp_merge(int n,BinTree... trees) {
+     //TODO
+	  if(trees[1]==null)
+	  {
+		  return trees[0];
+	  }
+	  BinTree.help_merge(trees[0], trees[n-1]);
+	  
+	  BinTree.helphelphelp_merge(n-1,trees);
+	  return trees[0];
+  }
+  private static BinTree help_merge(BinTree b1,BinTree b2)
+  {
+	  b1.insert(b2.root.getValue());
+	  BinTree.helphelp_merge(b1, b2.root.getLeft());
+	  BinTree.helphelp_merge(b1, b2.root.getRight());
+	  return b1;
+  }
+  private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
+  {
+	  b1.insert(b2.getValue());
+	  return b1;
+  }
   /**
    * Fuegt eine Zahl ein. Keine Aenderung, wenn das Element
    * schon enthalten ist.
