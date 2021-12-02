@@ -39,31 +39,53 @@ public class BinTree {
    * @param trees Die Baeume mit den einzufuegenden Zahlen.
    * @return Der neue Baum mit allen Zahlen.
    */
- public static BinTree merge(BinTree... trees) {
+   public static BinTree merge(BinTree... trees) {
+	   //ist die ursprüngliche Methode
 	  int n= trees.length;
 	  return helphelphelp_merge(n,trees);
   }
   public static BinTree helphelphelp_merge(int n,BinTree... trees) {
-     //TODO
-	  if(trees[1]==null)
-	  {
-		  return trees[0];
-	  }
-	  BinTree.help_merge(trees[0], trees[n-1]);
-	  
-	  BinTree.helphelphelp_merge(n-1,trees);
+     
+	  //führt die Method wirklich durch, durch die Variable n, kann ich den letzten Teil des Arrays quasi löschen
+	  trees[0]=BinTree.help_merge(trees[0], trees[n-1]);
+	  if(n>2)
+		  {
+		  	BinTree.helphelphelp_merge(n-1,trees);
+		  }
 	  return trees[0];
   }
   private static BinTree help_merge(BinTree b1,BinTree b2)
   {
-	  b1.insert(b2.root.getValue());
-	  BinTree.helphelp_merge(b1, b2.root.getLeft());
-	  BinTree.helphelp_merge(b1, b2.root.getRight());
+	  // fügt die wurzel ein und ruft die Methode helphelp_merge auf
+	  if(!(b2.root==null)) 
+		 {
+		  	b1.insert(b2.root.getValue());
+		  }
+	  
+	  if(b2.root.hasLeft()) 
+		 {
+		  	b1 =BinTree.helphelp_merge(b1, b2.root.getLeft());
+		 }
+	 
+	  else if(b2.root.hasRight()) 
+		  {
+		   b1=	BinTree.helphelp_merge(b1, b2.root.getRight());
+		  }
 	  return b1;
   }
   private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
   {
+	  /fügt die einzelnen Nodes eines Baumes aus dem Array in den Baum b1 ein
 	  b1.insert(b2.getValue());
+	  
+	  if(b2.hasLeft()) 
+		 {
+		  	b1 = BinTree.helphelp_merge(b1, b2.getLeft());
+		 }
+	  if(b2.hasRight()) 
+		  {
+		  	b1 = BinTree.helphelp_merge(b1, b2.getRight());
+		  }
 	  return b1;
   }
   /**
