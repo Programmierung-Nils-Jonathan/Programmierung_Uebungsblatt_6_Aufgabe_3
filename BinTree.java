@@ -45,25 +45,44 @@ public class BinTree {
   }
   public static BinTree helphelphelp_merge(int n,BinTree... trees) {
      //TODO
-	  if(trees[1]==null)
-	  {
-		  return trees[0];
-	  }
-	  BinTree.help_merge(trees[0], trees[n-1]);
 	  
-	  BinTree.helphelphelp_merge(n-1,trees);
+	  BinTree.help_merge(trees[0], trees[n-1]);
+	  if(n>1)
+		  {
+		  	BinTree.helphelphelp_merge(n-1,trees);
+		  }
 	  return trees[0];
   }
   private static BinTree help_merge(BinTree b1,BinTree b2)
   {
-	  b1.insert(b2.root.getValue());
-	  BinTree.helphelp_merge(b1, b2.root.getLeft());
-	  BinTree.helphelp_merge(b1, b2.root.getRight());
+	  if(!(b2.root==null)) 
+		 {
+		  	b1.insert(b2.root.getValue());
+		  }
+	  
+	  if(b2.root.hasLeft()) 
+		 {
+		  	BinTree.helphelp_merge(b1, b2.root.getLeft());
+		 }
+	 
+	  else if(b2.root.hasRight()) 
+		  {
+		  	BinTree.helphelp_merge(b1, b2.root.getRight());
+		  }
 	  return b1;
   }
   private static BinTree helphelp_merge(BinTree b1,BinTreeNode b2)
   {
 	  b1.insert(b2.getValue());
+	  if(b2.hasLeft()) 
+		 {
+		  	BinTree.helphelp_merge(b1, b2.getLeft());
+		 }
+	 
+	  else if(b2.hasRight()) 
+		  {
+		  	BinTree.helphelp_merge(b1, b2.getRight());
+		  }
 	  return b1;
   }
   /**
